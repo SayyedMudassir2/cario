@@ -4,9 +4,11 @@ import Link from 'next/link'
 import React from 'react'
 import { Button } from './ui/button'
 import { ChevronDown, FileText, GraduationCap, LayoutDashboard, PenBox, StarsIcon } from 'lucide-react'
-import { DropdownMenu, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent } from './ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent } from './ui/dropdown-menu'
+import { checkUser } from '@/lib/checkUser'
 
-const Header = () => {
+const Header = async () => {
+    await checkUser(); // Ensure user is checked before rendering
   return (
     <header className="fixed top-0 w-full border bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background">
         <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -30,7 +32,7 @@ const Header = () => {
                     </Link>
 
                 <DropdownMenu>
-                    <DropdownMenuTrigger>
+                    <DropdownMenuTrigger asChild>
                         <Button className="cursor-pointer">
                             <StarsIcon className="h-4 w-4 mr-2" />
                             <span className="hidden md:block">Growth Tools</span>
